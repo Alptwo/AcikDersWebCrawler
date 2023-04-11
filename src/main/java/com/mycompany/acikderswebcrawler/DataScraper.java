@@ -14,7 +14,7 @@ public class DataScraper {
 
     public static void main(String[] args) {
         // Test
-        DataScraper.GetSubjectData("https://acikders.ankara.edu.tr/course/view.php?id=7003");
+        DataScraper.GetSubjectData("https://acikders.ankara.edu.tr/course/view.php?id=112");
     }
     public static void GetSubjectData(String url) {
         //(tr) Url olarak https://acikders.ankara.edu.tr/course/ adresinden herhangi bir dersin linki verilmeli
@@ -36,9 +36,12 @@ public class DataScraper {
             //(tr) Kursun iceriklerinin tamami
             //(en) All the contents of the subject
             Element mainDiv = doc.select("ul[class='topics']").first();
+            if(mainDiv == null){
+                mainDiv = doc.select("ul[class='weeks']").first();
+            }
             
             //(tr) Kursun iceriklerinin haftalara bolunmus hali
-            //(en) Subject devided into weeks
+            //(en) Subject devided into weeks 
             Elements subDivs = mainDiv.select("li[class='section main clearfix']");
              
             for (Element content : subDivs) {

@@ -45,7 +45,7 @@ public class WebCrawler {
         return null;
     }
     public static void GetSubCategoryLinks(String url) {
-        // I need to write the code to get SubCategory urls that some categories have if they dont have sub categories and just have the subject link than it shoul directly go to GetSubjectLinks function
+        // I need to write the code to get SubCategory urls that some categories have if they dont have sub categories and just have the subject link than it should directly go to GetSubjectLinks function
     }
     public static void GetSubjectLinks(String url) {
         try{
