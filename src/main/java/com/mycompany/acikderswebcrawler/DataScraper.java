@@ -17,32 +17,38 @@ public class DataScraper {
             DataScraper.GetSubjectData("https://acikders.ankara.edu.tr/course/view.php?id=7003");
     }
     public static void GetSubjectData(String url) {
-        // Url olarak https://acikders.ankara.edu.tr/course/ adresinden herhangi bir dersin linki verilmeli
+        //(tr) Url olarak https://acikders.ankara.edu.tr/course/ adresinden herhangi bir dersin linki verilmeli
+        //(en) Url should be a subject link from https://acikders.ankara.edu.tr/course/
         try {
-            // Jsoup kullanarak belirtilen url'den bir HTML dokümanı çekin
             Document doc = Jsoup.connect(url).get();
 
-            // Kursun/Dersin Adi
+            //(tr) Kursun/Dersin Adi
+            //(en) Name of the subject
             Elements subjectName = doc.select("p[class='tree_item branch active_tree_node']");
             System.out.println(subjectName.text());
             
-            // Kursun egitmeninin adi
+            //(tr) Kursun egitmeninin adi
+            //(en) Name of the tutor of the subject
             Element tutorNameElement = doc.select("span[class='instancename']").first();
             String tutorName = tutorNameElement.text().replaceAll(" URL", "");
             System.out.println(tutorName);
             
-            // Kursun iceriklerinin tamami
+            //(tr) Kursun iceriklerinin tamami
+            //(en) All the contents of the subject
             Element mainDiv = doc.select("ul[class='topics']").first();
             
-            // Kursun iceriklerinin haftalara bolunmus hali
+            //(tr) Kursun iceriklerinin haftalara bolunmus hali
+            //(en) Subject devided into weeks
             Elements subDivs = mainDiv.select("li[class='section main clearfix']");
              
             for (Element content : subDivs) {
-                // Kursun Haftasinin Adi
+                //(tr) Kursun haftasinin adi
+                //(en) Subjects content(week) name
                 Elements sectionName = content.select("h3[class='sectionname']");
                 System.out.println(sectionName.text());
                 
-                // Kursun haftasinin iceriginin linki
+                //(tr) Kursun haftasinin iceriginin linki
+                //(en) Link of the contents of the week
                 Elements a = content.select("a[class='aalink']");
                 String link = a.attr("href");
                 System.out.println(link);
