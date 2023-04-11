@@ -10,13 +10,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class AcikDersWebCrawler {
+public class DataScraper {
 
     public static void main(String[] args) {
         // Test
-            AcikDersWebCrawler.Download("https://acikders.ankara.edu.tr/course/view.php?id=7003");
+            DataScraper.GetSubjectData("https://acikders.ankara.edu.tr/course/view.php?id=7003");
     }
-    public static void Download(String url) {
+    public static void GetSubjectData(String url) {
         // Url olarak https://acikders.ankara.edu.tr/course/ adresinden herhangi bir dersin linki verilmeli
         try {
             // Jsoup kullanarak belirtilen url'den bir HTML dokümanı çekin
@@ -47,7 +47,6 @@ public class AcikDersWebCrawler {
                 String link = a.attr("href");
                 System.out.println(link);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
