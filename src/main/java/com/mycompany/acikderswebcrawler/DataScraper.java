@@ -14,7 +14,7 @@ public class DataScraper {
 
     public static void main(String[] args) {
         // Test
-            DataScraper.GetSubjectData("https://acikders.ankara.edu.tr/course/view.php?id=7003");
+        DataScraper.GetSubjectData("https://acikders.ankara.edu.tr/course/view.php?id=7003");
     }
     public static void GetSubjectData(String url) {
         //(tr) Url olarak https://acikders.ankara.edu.tr/course/ adresinden herhangi bir dersin linki verilmeli
