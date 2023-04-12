@@ -15,7 +15,8 @@ public class WebCrawler {
     public static void main(String[] args) {
         // Test
         //WebCrawler.GetCategoryLinks();
-        WebCrawler.GetSubCategoryLinks("https://acikders.ankara.edu.tr/course/index.php?categoryid=123");
+        //WebCrawler.GetSubCategoryLinks("https://acikders.ankara.edu.tr/course/index.php?categoryid=123");
+        WebCrawler.GetSubjectLinks("https://acikders.ankara.edu.tr/course/index.php?categoryid=123");
     }
     public static ArrayList<String> GetCategoryLinks() {
         try{
@@ -54,7 +55,7 @@ public class WebCrawler {
             //(en) Getting HTML of all the sub categories
             Element subCategoriesDiv = doc.select("div[class='subcategories']").first();
             
-            //(tr)Eger alt kategori varsa url'leri almali
+            //(tr) Eger alt kategori varsa url'leri almali
             //(en) If there is any sub category than it should take the urls
             if(subCategoriesDiv != null){
                 Elements categories = subCategoriesDiv.select("div[class='category notloaded with_children collapsed']");
@@ -78,21 +79,32 @@ public class WebCrawler {
         }
         return null;
     }
-    public static void GetSubjectLinks(String url) {
-        try{
-            //(tr) Url https://acikders.ankara.edu.tr/course/ adresinden bir kategorinin linki olmalıdır
-            //(en) Url should be a link of the category from https://acikders.ankara.edu.tr/course/
+    public static ArrayList<String> GetSubjectLinks(String url) {
+        try {
             Document doc = Jsoup.connect(url).get();
-
-            Elements links = doc.select("a[href]");
-
-            for (Element link : links) {
-                String linkUrl = link.attr("href");
-                System.out.println(linkUrl);
-            }  
-            // I should return an array? of the links that gathered so it can be used for data scraping
+            
+            String categoryId = url.substring(url.indexOf("categoryid=") + 11, url.length());
+            Element allContents = doc.select("div[class='courses category-browse category-browse-" + categoryId + "']").first();
+            
+            // info > coursename > aalink > href
+            Elements oddFirst = allContents.select("div[class='coursebox clearfix odd first collapsed']");
+            Elements odd = allContents.select("div[class='coursebox clearfix odd collapsed']");
+            Elements even = allContents.select("div[class='coursebox clearfix even collapsed']");         
+            Elements oddlast = allContents.select("div[class='coursebox clearfix odd last collapsed']");    
+            Elements evenlast = allContents.select("div[class='coursebox clearfix even last collapsed']");
+            Elements firstLast = allContents.select("div[class='coursebox clearfix odd first last collapsed']");
+            
+            ArrayList<String> SubjectUrls = new ArrayList<String>();
+            
+            //if(odd != null) gibi ifadeler koy daha dogru ve efektif olur gibi
+            for(Element content : oddFirst){
+                
+            }
+            
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }
