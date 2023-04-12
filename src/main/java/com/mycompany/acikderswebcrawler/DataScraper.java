@@ -19,6 +19,9 @@ public class DataScraper {
     public static void GetSubjectData(String url) {
         //(tr) Url olarak https://acikders.ankara.edu.tr/course/ adresinden herhangi bir dersin linki verilmeli
         //(en) Url should be a subject link from https://acikders.ankara.edu.tr/course/
+        
+        //if Url contains page sayfalar arası geçi olmalı bazılarında page var page 0 1 gibi artıyor ona bak unutma
+        
         try {
             Document doc = Jsoup.connect(url).get();
 
@@ -46,7 +49,7 @@ public class DataScraper {
              
             for (Element content : subDivs) {
                 //(tr) Kursun haftasinin adi
-                //(en) Subjects content(week) name
+                //(en) Subjects content/week name
                 Elements sectionName = content.select("h3[class='sectionname']");
                 System.out.println(sectionName.text());
                 
