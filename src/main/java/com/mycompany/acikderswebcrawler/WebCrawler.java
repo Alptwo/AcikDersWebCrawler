@@ -16,7 +16,7 @@ public class WebCrawler {
         // Test
         //WebCrawler.GetCategoryLinks();
         //WebCrawler.GetSubCategoryLinks("https://acikders.ankara.edu.tr/course/index.php?categoryid=123");
-        WebCrawler.GetSubjectLinks("https://acikders.ankara.edu.tr/course/index.php?categoryid=123");
+        WebCrawler.GetSubjectLinks("https://acikders.ankara.edu.tr/course/index.php?categoryid=124");
     }
     public static ArrayList<String> GetCategoryLinks() {
         try{
@@ -86,22 +86,86 @@ public class WebCrawler {
             String categoryId = url.substring(url.indexOf("categoryid=") + 11, url.length());
             Element allContents = doc.select("div[class='courses category-browse category-browse-" + categoryId + "']").first();
             
-            // info > coursename > aalink > href
-            Elements oddFirst = allContents.select("div[class='coursebox clearfix odd first collapsed']");
-            Elements odd = allContents.select("div[class='coursebox clearfix odd collapsed']");
-            Elements even = allContents.select("div[class='coursebox clearfix even collapsed']");         
-            Elements oddlast = allContents.select("div[class='coursebox clearfix odd last collapsed']");    
-            Elements evenlast = allContents.select("div[class='coursebox clearfix even last collapsed']");
-            Elements firstLast = allContents.select("div[class='coursebox clearfix odd first last collapsed']");
-            
-            ArrayList<String> SubjectUrls = new ArrayList<String>();
-            
-            //if(odd != null) gibi ifadeler koy daha dogru ve efektif olur gibi
-            for(Element content : oddFirst){
-                
+            if(allContents != null)
+            {
+                // info > coursename > aalink > href
+                Elements oddFirst = allContents.select("div[class='coursebox clearfix odd first collapsed']");
+                Elements odd = allContents.select("div[class='coursebox clearfix odd collapsed']");
+                Elements even = allContents.select("div[class='coursebox clearfix even collapsed']");         
+                Elements oddlast = allContents.select("div[class='coursebox clearfix odd last collapsed']");    
+                Elements evenlast = allContents.select("div[class='coursebox clearfix even last collapsed']");
+                Elements firstLast = allContents.select("div[class='coursebox clearfix odd first last collapsed']");
+
+                ArrayList<String> SubjectUrls = new ArrayList<String>();
+
+                if(oddFirst != null){
+                    for(Element content : oddFirst){
+                        Elements contentInfo = content.select("a[class='aalink']");
+                        Elements alink = contentInfo.select("a[href]");
+                        for (Element aElement : alink) {
+                            String categoryUrl = aElement.attr("href");
+                            SubjectUrls.add(categoryUrl);
+                            System.out.println(categoryUrl);
+                        }
+                    }
+                }
+                if(odd != null){
+                    for(Element content : odd){
+                        Elements contentInfo = content.select("a[class='aalink']");
+                        Elements alink = contentInfo.select("a[href]");
+                        for (Element aElement : alink) {
+                            String categoryUrl = aElement.attr("href");
+                            SubjectUrls.add(categoryUrl);
+                            System.out.println(categoryUrl);
+                        }
+                    }
+                }
+                if(even != null){
+                    for(Element content : even){
+                        Elements contentInfo = content.select("a[class='aalink']");
+                        Elements alink = contentInfo.select("a[href]");
+                        for (Element aElement : alink) {
+                            String categoryUrl = aElement.attr("href");
+                            SubjectUrls.add(categoryUrl);
+                            System.out.println(categoryUrl);
+                        }
+                    }
+                }
+                if(oddlast != null){
+                    for(Element content : oddlast){
+                        Elements contentInfo = content.select("a[class='aalink']");
+                        Elements alink = contentInfo.select("a[href]");
+                        for (Element aElement : alink) {
+                            String categoryUrl = aElement.attr("href");
+                            SubjectUrls.add(categoryUrl);
+                            System.out.println(categoryUrl);
+                        }
+                    }
+                }
+                if(evenlast != null){
+                    for(Element content : evenlast){
+                        Elements contentInfo = content.select("a[class='aalink']");
+                        Elements alink = contentInfo.select("a[href]");
+                        for (Element aElement : alink) {
+                            String categoryUrl = aElement.attr("href");
+                            SubjectUrls.add(categoryUrl);
+                            System.out.println(categoryUrl);
+                        }
+                    }
+                }
+                if(firstLast != null){
+                    for(Element content : firstLast){
+                        Elements contentInfo = content.select("a[class='aalink']");
+                        Elements alink = contentInfo.select("a[href]");
+                        for (Element aElement : alink) {
+                            String categoryUrl = aElement.attr("href");
+                            SubjectUrls.add(categoryUrl);
+                            System.out.println(categoryUrl);
+                        }
+                    }
+                }
+                return SubjectUrls;
             }
-            
-            
         } catch (IOException e) {
             e.printStackTrace();
         }
