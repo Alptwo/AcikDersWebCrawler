@@ -16,7 +16,7 @@ public class WebCrawler {
         // Test
         //WebCrawler.GetCategoryLinks();
         //WebCrawler.GetSubCategoryLinks("https://acikders.ankara.edu.tr/course/index.php?categoryid=123");
-        WebCrawler.GetSubjectLinks("https://acikders.ankara.edu.tr/course/index.php?categoryid=124");
+        WebCrawler.GetSubjectLinks("https://acikders.ankara.edu.tr/course/index.php?categoryid=123");
     }
     public static ArrayList<String> GetCategoryLinks() {
         try{
@@ -37,7 +37,6 @@ public class WebCrawler {
                     //(en) Getting the urls under the categories
                     String categoryUrl = aElement.attr("href");
                     categoryUrls.add(categoryUrl);
-                    System.out.println(categoryUrl);
                 }
             }
             return categoryUrls;
@@ -69,7 +68,7 @@ public class WebCrawler {
                         //(en) Getting the urls under the subcategories
                         String categoryUrl = aElement.attr("href");
                         categoryUrls.add(categoryUrl);
-                        System.out.println(categoryUrl);
+                        //System.out.println(categoryUrl);
                     }
                 }
                 return categoryUrls;
